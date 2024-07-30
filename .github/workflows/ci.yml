@@ -1,0 +1,44 @@
+name: CI
+
+on: [ push, pull_request ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-unix:
+    if: github.repository != 'otterengine/template_module'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: install bake
+        run: |
+          git clone https://github.com/SanderMertens/bake
+          make -C bake/build-$(uname)
+          bake/bake setup
+
+      - name: build
+        run: |
+          bake --strict
+
+  build-windows:
+    if: github.repository != 'otterengine/template_module'
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: install bake
+        run: |
+          git clone https://github.com/SanderMertens/bake
+          cd bake\build-Windows
+          nmake
+          cd ..
+          ./bake setup --local
+
+      - name: build
+        run: |
+          bake/bake --strict

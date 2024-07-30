@@ -1,0 +1,11 @@
+{
+    "id": "otter.slice",
+    "type": "package",
+    "value": {
+        "author": "Olle Lukowski",
+        "description": "A module for Otter Engine that provides a slice data structure."
+    },
+    "lang.c": {
+        "c-standard": "c89"
+    }
+}
