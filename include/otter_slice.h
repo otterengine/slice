@@ -38,7 +38,7 @@ otter_slice_slice(otter_slice_t slice, size_t start, size_t end, otter_slice_t *
 #define otter_slice_len_t(slice, T) ((slice).len / sizeof(T))
 
 #define otter_slice_init_t(T, array, len) otter_slice_init((void *)array, len * sizeof(T))
-#define otter_slice_get_t(slice, T, index, out) otter_slice_get(slice, index * sizeof(T), (void **)&out)
+#define otter_slice_get_t(slice, T, index, out) otter_slice_get(slice, index * sizeof(T), (void **)out)
 
 #define otter_slice_slice_t(slice, T, start, end, out) otter_slice_slice(slice, start * sizeof(T), end * sizeof(T), out)
 
