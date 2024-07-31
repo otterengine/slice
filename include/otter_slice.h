@@ -8,8 +8,6 @@
 extern "C" {
 #endif /* __cplusplus */
 
-#include <stddef.h>
-
 typedef int otter_slice_result_t;
 
 #define OTTER_SLICE_OK (0)
@@ -19,20 +17,20 @@ typedef int otter_slice_result_t;
 typedef struct otter_slice otter_slice_t;
 struct otter_slice {
   void *ptr;
-  size_t len;
+  unsigned long len;
 };
 
 OTTER_SLICE_API
 otter_slice_t
-otter_slice_init(void *ptr, size_t len);
+otter_slice_init(void *ptr, unsigned long len);
 
 OTTER_SLICE_API
 otter_slice_result_t
-otter_slice_get(otter_slice_t slice, size_t index, void **out);
+otter_slice_get(otter_slice_t slice, unsigned long index, void **out);
 
 OTTER_SLICE_API
 otter_slice_result_t
-otter_slice_slice(otter_slice_t slice, size_t start, size_t end, otter_slice_t *out);
+otter_slice_slice(otter_slice_t slice, unsigned long start, unsigned long end, otter_slice_t *out);
 
 #define otter_slice_len(slice) ((slice).len)
 #define otter_slice_len_t(slice, T) ((slice).len / sizeof(T))
