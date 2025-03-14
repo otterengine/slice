@@ -10,4 +10,5 @@ target_include_directories(otter_slice PUBLIC include)
 
 target_sources(otter_slice PRIVATE
   src/init.c
+  src/slice.c
 )
